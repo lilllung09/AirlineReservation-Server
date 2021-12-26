@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>thymeleafTest2</title>
+</head>
+<body>
+  <h1>Thymeleaf Test Page 2</h1>
+  <h2>id = <span th:text="${testVO.id}"></span></h2>
+  <h2>name = <span th:text="${testVO.name}"></span></h2>
+
+  <!-- 테그 인식 X -->
+  <div th:text='${"<h3>"+testVO.id+"</h3>"}'></div>
+  <!-- 테그 인식 O -->
+  <div th:utext='${"<h3>"+testVO.name+"</h3>"}'></div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>MariaDBTest</title>
+</head>
+<body>
+  <h1>MariaDB Test Page</h1>
+
+  <table border="1">
+    <tr>
+      <td>ID</td>
+      <td>NAME</td>
+    </tr>
+    <tr th:each="member, interState : ${listDTO}">
+      <td th:text="${member.id}"></td>
+      <td th:text='${member.name}'></td>
+    </tr>
+  </table>
+
+</body>
+</html>

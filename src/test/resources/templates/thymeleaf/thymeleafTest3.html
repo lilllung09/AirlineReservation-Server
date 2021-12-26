@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>thymeleafTest3</title>
+</head>
+<body>
+  <h1>Thymeleaf Test Page 3</h1>
+
+  <!-- target: table 테그 안에서만 유효한 변수 -->
+  <table border="1" th:with="target='lilllung01'">
+    <tr>
+      <td>ID</td>
+      <td>NAME</td>
+      <td>DATE1</td>
+      <td>DATE2</td>
+      <td>INDEX</td>
+      <td>COUNT</td>
+      <td>SIZE</td>
+      <td>ODD/EVEN</td>
+      <td>FIRST/LAST</td>
+    </tr>
+    <tr th:each="member, interState : ${listVO}">
+      <td th:text="${member.id == target ? 'SECRET' : member.id}"></td>
+      <td th:text='${member.name}'></td>
+      <td th:text="${#temporals.formatISO(member.localDateTime)}"></td>
+      <td th:text="${#temporals.format(member.localDateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+      <td th:text="${interState.index}"></td>
+      <td th:text="${interState.count}"></td>
+      <td th:text="${interState.size}"></td>
+      <td th:text="${'홀수: ' + interState.odd + ' 짝수: ' + interState.even}"></td>
+      <td th:text="${'처음: ' + interState.first + ' 끝: ' + interState.last}"></td>
+    </tr>
+  </table>
+
+</body>
+</html>
