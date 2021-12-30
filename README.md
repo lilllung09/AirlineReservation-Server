@@ -1,4 +1,5 @@
-# AirlineReservation-Server
+# AirlineReservation-Server  
+### (project is in progress...)  
 
 #### Web Application Framework:  
 Spring Boot  
@@ -11,3 +12,4 @@ Thymeleaf
 
 #### DataBase, DataBase Framework:  
 MariaDB, MyBatis
+
