@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>MariaDBTest</title>
+</head>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+
+<body>
+<h1>Sign In Page</h1>
+<form id="form">
+    <fieldset>
+        <legend>로그인</legend>
+        <p>id:<input id="id" type="text" th:value="${signInId}" /></p>
+        <p>pw:<input id="pw" type="password" /></p>
+        <input type="button" onclick="" value="Sign In">
+    </fieldset>
+</form>
+
+</body>
+</html>

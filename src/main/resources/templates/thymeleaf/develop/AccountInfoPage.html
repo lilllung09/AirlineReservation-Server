@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>DEV</title>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</head>
+
+<body>
+<h1>DEV Accounts Page</h1>
+<div>
+    <table border="1">
+        <tr>
+            <td>ID</td>
+            <td>PW</td>
+            <td>NAME</td>
+            <td>BIRTH</td>
+            <td>GENDER</td>
+            <td>PH</td>
+            <td>MAIL</td>
+            <td>SIGNUP</td>
+        </tr>
+        <tr th:each="member, interState : ${accounts}">
+            <td th:text='${member.id}'></td>
+            <td th:text="${member.pw}"></td>
+            <td th:text='${member.name}'></td>
+            <td th:text="${member.birth}"></td>
+            <td th:text='${member.gender}'></td>
+            <td th:text="${member.ph}"></td>
+            <td th:text='${member.mail}'></td>
+            <td th:text='${member.t_signUp}'></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

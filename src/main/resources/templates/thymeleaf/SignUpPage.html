@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>MariaDBTest</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</head>
+<body>
+<h1>Sign Up Page</h1>
+<form style="display:none;" id="signInForm" action="http://127.0.0.1:8082/airline/signInPage" method="get">
+    <input type="text" name="signInId" id="signInId" value="">
+</form>
+<fieldset>
+    <legend>회원 가입</legend>
+    <form id="signUpForm">
+        <p>name:<input id="name" type="text" /></p>
+        <p>id:<input id="id" type="text" /></p>
+        <p>pw:<input id="pw" type="password" /></p>
+        <p>birth:<input id="birth" type="date" /></p>
+        <p>
+            gender:
+            <input type="radio" mame="gender" id="genderM" value="1" checked="true">남성
+            <input type="radio" name="gender" id="genderF" value="0">여성
+        </p>
+        <p>ph:<input id="ph" type="tel" /></p>
+        <p>mail:<input id="mail" type="email" /></p>
+        <input type="button" onclick="signUp();" value="Sigh Up">
+    </form>
+</fieldset>
+<script type="text/javascript">
+    var agent = navigator.userAgent.toLowerCase();
+    if ( (navigator.appName == 'Netscape' && navigator.userAgent.search('Trident') != -1)
+            || (agent.indexOf("msie") != -1) ) {
+
+        alert('Internet Explorer는 호환되지 않는 브라우저 입니다.')
+    }
+
+    let id = $('#id');
+	let pw = $('#pw');
+    let name = $('#name');
+	let birth = $('#birth');
+	let ph = $('#ph');
+	let mail = $('#mail');
+
+	function signUp() {
+		let regex_name = /^[a-zA-Z가-힣]*$/;
+		if (!regex_name.test(name.val())) {
+			alert("정확한 이름을 입력해주세요");
+			name.focus();
+			return;
+		}
+
+		let regex_id = /^[a-zA-Z0-9]*$/;
+		if (!regex_id.test(id.val()) || id.val().length < 5 || id.val().length > 40) {
+			alert("정확한 아이디를 입력해주세요(5자 이상 40자 미만)");
+			pw.focus();
+			return;
+		}
+
+		let regex_pw = /^[a-zA-Z0-9]*$/;
+		if (!regex_pw.test(pw.val()) || pw.val().length < 5 || pw.val().length > 50) {
+			alert("정확한 비밀번호를 입력해주세요(5자 이상 50자 미만)");
+			pw.focus();
+			return;
+		}
+
+		let regex_birth = /^(19|20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/;
+		if (!regex_birth.test(birth.val())) {
+			alert("정확한 생일을 입력해주세요");
+			birth.focus();
+			return;
+		}
+
+		let gender = false;
+		if ($('#genderM').is(':checked')) {
+		    gender = true;
+		}
+
+		let regex_ph = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+		if (!regex_ph.test(ph.val())) {
+			alert("정확한 핸드폰 번호를 입력해주세요");
+			ph.focus();
+			return;
+		}
+
+		let regex_mail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+		if (!regex_mail.test(mail.val())) {
+			alert("정확한 이메일을 입력해주세요");
+			mail.focus();
+			return;
+		}
+
+		let resultData;
+		$.ajax({
+			method: "post",
+			url: "signUp",
+			headers: {'Content-Type': 'application/json;charset=utf-8'},
+			data: JSON.stringify({
+				"name" : name.val(),
+			    "id" : id.val(),
+			    "pw" : pw.val(),
+				"birth" : birth.val(),
+				"gender" : gender,
+				"ph" : ph.val(),
+				"mail" : mail.val()
+			}),
+		    dataType:"json",
+			success: function(data, textStatus, jqXHR) {
+			    resultData = data;
+
+			},error: function(jqXHR, textStatus, errorThrown) {
+				resultData.result = "0";
+				resultData.state = "unknown error";
+
+			},complete: function(jqXHR, textStatus) {
+				if (resultData.state != "normal") {
+				    alert("회원가입 실패: " + resultData.state);
+
+				} else {
+	                $('#signInId').attr('value', id.val());
+					let login = confirm("회원가입에 성공했습니다. 로그인화면으로 이동?");
+					if (login) {
+		                $('#signInForm').submit();
+					}
+				}
+			}
+		});
+	}
+</script>
+</body>
+</html>
