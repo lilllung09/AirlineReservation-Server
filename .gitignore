@@ -24,3 +24,5 @@ hs_err_pid*
 /.idea/
 /src/main/resources/application.properties
 /src/test/resources/application.properties
+/target/
+/src/main/java/com/gmail/lilllung09/airlinereservation/util/HashValue.java
