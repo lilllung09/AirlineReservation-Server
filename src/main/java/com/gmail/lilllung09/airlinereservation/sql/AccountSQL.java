@@ -15,8 +15,6 @@ public class AccountSQL {
         query.append(TABLE_ACCOUNT).append("(id, pw, name, birth, gender, ph, mail)");
         query.append(" VALUES(#{account.id}, #{account.pw}, #{account.name}, #{account.birth}, #{account.gender}, #{account.ph}, #{account.mail})");
 
-        System.out.println(query.toString());
-
         return query.toString();
     }
 
@@ -27,7 +25,6 @@ public class AccountSQL {
         query.append("FROM ").append(TABLE_ACCOUNT).append(" ");
         query.append("WHERE ").append("${column} = ").append("#{data}");
 
-        System.out.println(query.toString());
         return query.toString();
     }
 }
